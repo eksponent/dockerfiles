@@ -17,7 +17,7 @@ RUN docker-php-ext-install pdo_mysql mbstring opcache \
 # Install and configure Xdebug
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug \
-    && sed -i '1 a xdebug.remote_autostart=false' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && sed -i '1 a xdebug.remote_autostart=true' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && sed -i '1 a xdebug.remote_mode=req' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && sed -i '1 a xdebug.remote_handler=dbgp' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && sed -i '1 a xdebug.remote_connect_back=1 ' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
