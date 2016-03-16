@@ -26,8 +26,11 @@ RUN pecl install xdebug \
     && sed -i '1 a xdebug.remote_enable=1' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Quite a few installs run into an issue where UMASK 022 should be 002 so its closer to 0775
-# https://hub.docker.com/r/revollat/nginx-php-composer/~/dockerfile/
+# https://hub.docker.com/r/nubs/composer-build/~/dockerfile/
 
-RUN sed -i -e 's/^UMASK *[0-9]*.*/UMASK    002/' /etc/login.defs
+ADD umask.sh /usr/local/bin/umask.sh
+RUN chmod +x /usr/local/bin/umask.sh
+
+ENTRYPOINT ["/usr/local/bin/umask.sh"]
 
 CMD ["php-fpm"]
