@@ -21,6 +21,11 @@ RUN apt-get update && apt-get install -y \
      && rm /usr/src/php/ext/redis.tgz \
      && docker-php-ext-install redis-2.2.7
 
+# Quite a few installs run into an issue where UMASK 022 should be 002 so its closer to 0775
+# https://hub.docker.com/r/revollat/nginx-php-composer/~/dockerfile/
+
+RUN sed -i -e 's/^UMASK *[0-9]*.*/UMASK    002/' /etc/login.defs
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
