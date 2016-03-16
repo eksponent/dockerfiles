@@ -21,7 +21,13 @@ RUN apt-get update && apt-get install -y \
      && rm /usr/src/php/ext/redis.tgz \
      && docker-php-ext-install redis-2.2.7
 
+# Quite a few installs run into an issue where UMASK 022 should be 002 so its closer to 0775
+# https://hub.docker.com/r/nubs/composer-build/~/dockerfile/
+ADD umask.sh /usr/local/bin/umask.sh
+RUN chmod +x /usr/local/bin/umask.sh
+
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
+ENTRYPOINT ["/usr/local/bin/umask.sh"]
 CMD ["php-fpm"]
