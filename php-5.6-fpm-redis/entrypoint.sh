@@ -5,5 +5,20 @@
 # https://hub.docker.com/r/nubs/composer-build/~/dockerfile/
 umask 002
 
+
+# Enable xdebug if the ENABLE_XDEBUG environment variable is set
+if [ -n "$ENABLE_XDEBUG" ]; then
+    # Install and configure Xdebug
+    RUN pecl install xdebug \
+        && docker-php-ext-enable xdebug \
+        && sed -i '1 a xdebug.remote_autostart=true' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && sed -i '1 a xdebug.remote_mode=req' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && sed -i '1 a xdebug.remote_handler=dbgp' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && sed -i '1 a xdebug.remote_connect_back=1 ' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && sed -i '1 a xdebug.remote_port=9000' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && sed -i '1 a xdebug.remote_host=127.0.0.1' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+        && sed -i '1 a xdebug.remote_enable=1' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+fi
+
 # Run php-fpm
 php-fpm
