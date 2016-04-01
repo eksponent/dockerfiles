@@ -7,6 +7,7 @@ umask 002
 
 
 # Enable xdebug if the ENABLE_XDEBUG environment variable is set
+# We only want xdebug in specific circumstances so it's better to opt-in when we need it
 if [ -n "$ENABLE_XDEBUG" ]; then
     # Install and configure Xdebug
     RUN pecl install xdebug \
