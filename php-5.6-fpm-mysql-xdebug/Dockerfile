@@ -29,9 +29,9 @@ RUN docker-php-ext-install pdo_mysql mbstring opcache \
 # Quite a few installs run into an issue where UMASK 022 should be 002 so its closer to 0775
 # https://hub.docker.com/r/nubs/composer-build/~/dockerfile/
 
-ADD umask.sh /usr/local/bin/umask.sh
-RUN chmod +x /usr/local/bin/umask.sh
+ADD entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/umask.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 CMD ["php-fpm"]
