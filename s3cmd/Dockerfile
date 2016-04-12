@@ -10,5 +10,3 @@ RUN pip install s3cmd
 
 RUN mkdir /opt
 WORKDIR /opt
-
-ENTRYPOINT ["s3cmd"]
