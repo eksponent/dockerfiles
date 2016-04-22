@@ -9,9 +9,10 @@ umask 002
 # Enable xdebug if the ENABLE_XDEBUG environment variable is set
 # We only want xdebug in specific circumstances so it's better to opt-in when we need it
 if [ -n "$ENABLE_XDEBUG" ]; then
-    # Install and configure Xdebug
-    RUN pecl install xdebug \
+    # Install and configure Xdebug, RUN is not used in entrypoint scripts
+    pecl install xdebug \
         && docker-php-ext-enable xdebug \
+        && touch /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
         && sed -i '1 a xdebug.remote_autostart=true' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
         && sed -i '1 a xdebug.remote_mode=req' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
         && sed -i '1 a xdebug.remote_handler=dbgp' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
