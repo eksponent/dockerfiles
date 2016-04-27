@@ -14,6 +14,9 @@ RUN docker-php-ext-install pdo_mysql mbstring opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd
 
+# Timezone should be set generally for Europe/Copenhagen to stop various warnings
+RUN sed -i '1 a date.timezone=Europe/Copenhagen' /usr/local/etc/php/conf.d/php.ini
+
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
