@@ -5,6 +5,9 @@
 # https://hub.docker.com/r/nubs/composer-build/~/dockerfile/
 umask 002
 
+# Always set a timezone
+touch /usr/local/etc/php/conf.d/local.ini
+sed -i '1 a date.timezone=Europe/Copenhagen' /usr/local/etc/php/conf.d/local.ini
 
 # Enable xdebug if the ENABLE_XDEBUG environment variable is set
 # We only want xdebug in specific circumstances so it's better to opt-in when we need it
