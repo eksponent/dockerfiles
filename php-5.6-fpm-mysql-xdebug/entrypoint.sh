@@ -21,5 +21,13 @@ if [ -n "$ENABLE_XDEBUG" ]; then
         && sed -i '1 a xdebug.remote_enable=1' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 fi
 
+if [ -n "$ENABLE_MEMCACHE" ]; then
+	
+	RUN apt-get update \
+  	&& apt-get install -y php5-memcached \
+  	&& apt-get install -y build-essential memcached php-pear \
+  	pecl install memcached
+fi
+
 # Run php-fpm
 php-fpm
