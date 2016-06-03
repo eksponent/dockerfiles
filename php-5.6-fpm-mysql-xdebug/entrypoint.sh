@@ -25,8 +25,7 @@ if [ -n "$ENABLE_MEMCACHE" ]; then
 	
 	RUN apt-get update \
   	&& apt-get install -y php5-memcached \
-  	&& apt-get install -y build-essential memcached php-pear \
-  	pecl install memcached
+  	&& apt-get install -y build-essential memcached php-pear
 fi
 
 # Run php-fpm
