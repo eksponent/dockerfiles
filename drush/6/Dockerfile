@@ -12,6 +12,10 @@ RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libpq-dev unzi
   && echo "export PATH=~/.composer/vendor/bin:\$PATH" >> ~/.bash_profile \
   && rm -rf /var/lib/apt/lists/*
 
+# Include memcache for installs that require it
+RUN pecl install memcache && docker-php-ext-enable memcache
+
+
 COPY php.ini php.ini /usr/local/etc/php/conf.d/
 
 RUN mkdir /drush \
