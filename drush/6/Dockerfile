@@ -4,7 +4,7 @@ MAINTAINER Eksponent <info@eksponent.com>
 VOLUME /var/www/html
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libpq-dev unzip patch git sudo mysql-client \
+RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libpq-dev unzip patch git sudo mysql-client imagemagick \
   && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
   && docker-php-ext-install gd mbstring pdo pdo_mysql zip \
   && curl -sS https://getcomposer.org/installer | php \
