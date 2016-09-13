@@ -46,6 +46,7 @@ RUN chmod +x /opt/google/chrome/google-chrome
 # Chrome Driver
 ADD chromedriver_linux64-2.21.zip /chromedriver_linux64-2.21.zip
 RUN unzip /chromedriver_linux64-2.21.zip
+RUN chmod 0775 /chromedriver
 
 #========================================
 # Add normal user with passwordless sudo
