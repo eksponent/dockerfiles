@@ -13,7 +13,7 @@ if [ ! -z "$SE_OPTS" ]; then
   echo "appending selenium options: ${SE_OPTS}"
 fi
 
-/chrome-driver &
+/chromedriver &
 
 SERVERNUM=$(get_server_num)
 xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" \
