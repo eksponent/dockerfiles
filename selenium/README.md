@@ -17,3 +17,14 @@ Upgrading from Chrome 52 to 53 will give errors like
 `PHP Fatal error:  Call to a member function getParent() on null in features/bootstrap/CKEditorFeatureContext.php on line 15`
 
 For CKEditor/WYSIWYG tests
+
+
+### VNC Viewer
+
+Start the server
+
+`docker exec -i (name of container) bash -c "x11vnc -listen 0.0.0.0"`
+
+Connect and view, and your favourite VNC viewer at the IP of the container
+
+`gvncviewer 172.20.0.5`
