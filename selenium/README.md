@@ -21,6 +21,13 @@ For CKEditor/WYSIWYG tests
 
 ### VNC Viewer
 
+Make sure the ports are exposed from the hoster
+
+```
+    ports:
+      - "5900:5900"
+```
+
 Start the server
 
 `docker exec -i (name of container) bash -c "x11vnc -listen 0.0.0.0"`
