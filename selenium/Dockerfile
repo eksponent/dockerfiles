@@ -78,6 +78,7 @@ RUN apt-get update -qqy \
   && apt-get -qqy install \
     xvfb \
     x11vnc \
+    net-tools \
   && rm -rf /var/lib/apt/lists/*
 
 #==============================
