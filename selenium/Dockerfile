@@ -77,6 +77,7 @@ RUN echo "${TZ}" > /etc/timezone \
 RUN apt-get update -qqy \
   && apt-get -qqy install \
     xvfb \
+    x11vnc \
   && rm -rf /var/lib/apt/lists/*
 
 #==============================
@@ -93,7 +94,9 @@ RUN chmod +x /opt/bin/entry_point.sh
 #============================
 # Some configuration options
 #============================
-ENV SCREEN_WIDTH 1360
+
+# Set wide enough to accomodate 1500x800 and lower
+ENV SCREEN_WIDTH 1600
 ENV SCREEN_HEIGHT 1020
 ENV SCREEN_DEPTH 24
 ENV DISPLAY :99.0
