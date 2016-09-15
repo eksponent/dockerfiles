@@ -21,6 +21,11 @@ RUN apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
  && pecl install imagick \
  && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 
+# LDAP
+RUN apt-get install libldap2-dev -y && \
+    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu && \
+    docker-php-ext-install ldap 
+
 
 RUN curl -L https://pecl.php.net/get/redis-2.2.7.tgz > /tmp/redis.tgz \
     && mkdir -p /usr/src/php/ext \
