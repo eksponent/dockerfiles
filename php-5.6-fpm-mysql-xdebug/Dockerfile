@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     apt-utils \
     mysql-client \
     zlib1g-dev \
-    imagemagick
+    imagemagick \
+    unzip
 
 RUN docker-php-ext-install pdo_mysql mbstring opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -21,7 +22,7 @@ RUN apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
  && pecl install imagick \
  && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 
-# LDAP
+# LDAP (used by RUC)
 RUN apt-get install libldap2-dev -y && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu && \
     docker-php-ext-install ldap 
