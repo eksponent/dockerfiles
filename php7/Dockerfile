@@ -34,7 +34,7 @@ RUN composer --version
 
 # Set timezone
 RUN rm /etc/localtime
-RUN ln -s /usr/share/zoneinfo/Europe/Prague /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime
 RUN "date"
 
 # Type docker-php-ext-install to see available extensions
