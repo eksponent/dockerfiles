@@ -27,5 +27,10 @@ if [ -n "$ENABLE_MEMCACHE" ]; then
   	&& apt-get install -y build-essential memcached php-pear
 fi
 
+if [ -n "$ENABLE_XDEBUG_PROFILE" ]; then
+	sed -i '1 a xdebug.profiler_enable = 1' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+	sed -i '1 a xdebug.profiler_output_dir = /tmp' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+fi
+
 # Run php-fpm
 php-fpm
