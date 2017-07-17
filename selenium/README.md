@@ -28,10 +28,9 @@ Make sure the ports are exposed from the hoster
       - "5900:5900"
 ```
 
-Start the server
-
-`docker exec -i (name of container) bash -c "x11vnc -listen 0.0.0.0"`
 
 Connect and view, and your favourite VNC viewer at the IP of the container
+
+Use `docker inspect TheName` to find the IP
 
 `gvncviewer 172.20.0.5`

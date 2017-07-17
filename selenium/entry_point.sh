@@ -21,5 +21,8 @@ xvfb-run -n $SERVERNUM --server-args="-screen 0 $GEOMETRY -ac +extension RANDR" 
   ${SE_OPTS} &
 NODE_PID=$!
 
+# Fire up the VNC listener
+x11vnc -listen 0.0.0.0 &
+
 trap shutdown SIGTERM SIGINT
 wait $NODE_PID

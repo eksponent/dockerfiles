@@ -17,6 +17,7 @@ RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/a
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install \
     bzip2 \
+    tzdata \
     ca-certificates \
     openjdk-8-jre-headless \
     sudo \
