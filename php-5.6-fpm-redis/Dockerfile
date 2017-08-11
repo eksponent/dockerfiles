@@ -10,11 +10,13 @@ RUN apt-get update && apt-get install -y \
         drush \
         mysql-client \
         zlib1g-dev \
+        libxml2-dev \
      # General packages that should already be included with the right image
      && docker-php-ext-install zip  \
      && docker-php-ext-install pdo_mysql mbstring opcache \
      && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
      && docker-php-ext-install gd \
+     && docker-php-ext-install soap \
      # redis
      && curl -L https://pecl.php.net/get/redis-2.2.7.tgz >> /usr/src/php/ext/redis.tgz \
      && tar -xf /usr/src/php/ext/redis.tgz -C /usr/src/php/ext/ \
