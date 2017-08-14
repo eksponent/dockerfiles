@@ -1,5 +1,8 @@
 FROM php:5.6-fpm
 # Install modules
+
+RUN mkdir -p /usr/src/php/ext
+
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -16,12 +19,12 @@ RUN apt-get update && apt-get install -y \
      && docker-php-ext-install pdo_mysql mbstring opcache \
      && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
      && docker-php-ext-install gd \
-     && docker-php-ext-install soap \
-     # redis
-     && curl -L https://pecl.php.net/get/redis-2.2.7.tgz >> /usr/src/php/ext/redis.tgz \
-     && tar -xf /usr/src/php/ext/redis.tgz -C /usr/src/php/ext/ \
-     && rm /usr/src/php/ext/redis.tgz \
-     && docker-php-ext-install redis-2.2.7
+     && docker-php-ext-install soap 
+
+RUN curl -L https://pecl.php.net/get/redis-2.2.7.tgz > /tmp/redis.tgz \
+    && tar -xvf /tmp/redis.tgz -C /usr/src/php/ext \
+    && rm /tmp/redis.tgz \
+    && docker-php-ext-install redis-2.2.7
 
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
