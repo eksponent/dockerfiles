@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     mysql-client \
     zlib1g-dev \
     imagemagick \
+    libxml2-dev \
     unzip
 
 RUN docker-php-ext-install pdo_mysql mbstring opcache \
@@ -27,6 +28,8 @@ RUN apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
 RUN apt-get install libldap2-dev -y && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu && \
     docker-php-ext-install ldap 
+
+RUN docker-php-ext-install soap
 
 
 RUN curl -L https://pecl.php.net/get/redis-2.2.7.tgz > /tmp/redis.tgz \
