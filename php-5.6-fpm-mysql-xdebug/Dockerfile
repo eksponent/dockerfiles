@@ -46,4 +46,7 @@ ADD fake-sendmail.sh /usr/local/bin/fake-sendmail.sh
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
