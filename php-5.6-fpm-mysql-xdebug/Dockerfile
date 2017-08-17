@@ -15,8 +15,8 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
 
 RUN docker-php-ext-install pdo_mysql mbstring opcache \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install zip
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install -j$(nproc) zip
 
 # imagemagick as PHP extension
 RUN apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
@@ -27,9 +27,12 @@ RUN apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
 # LDAP (used by RUC)
 RUN apt-get install libldap2-dev -y && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu && \
-    docker-php-ext-install ldap 
+    docker-php-ext-install -j$(nproc) ldap 
 
-RUN docker-php-ext-install soap
+RUN docker-php-ext-install -j$(nproc) soap
+# BCMath is needed on Scleroseforeningen D8
+RUN docker-php-ext-install -j$(nproc) bcmath && \
+    docker-php-ext-enable bcmath
 
 
 RUN curl -L https://pecl.php.net/get/redis-2.2.7.tgz > /tmp/redis.tgz \
