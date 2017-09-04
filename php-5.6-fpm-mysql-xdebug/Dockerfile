@@ -52,4 +52,8 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
+# Install Drush.
+RUN composer global require drush/drush
+RUN echo 'export PATH="$PATH:/root/.composer/vendor/bin"' >> /root/.bashrc
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
