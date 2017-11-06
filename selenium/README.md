@@ -34,3 +34,25 @@ Connect and view, and your favourite VNC viewer at the IP of the container
 Use `docker inspect TheName` to find the IP
 
 `gvncviewer 172.20.0.5`
+
+### SHM Size fix
+
+If you get unexplained behaviour you may need to increase the SHM Size , bad behaviour could include odd things happening when opening a new window etc.
+
+Try adding the `shm_size` parameter.
+
+```
+  selenium-chrome:
+    image: eksponent/selenium
+    ...
+    shm_size: 2gb
+```
+
+You will need 1.7.0+ to use this argument, if you're running from CircleCI..
+
+```
+machine:
+  pre:
+    # 1.7.0-beta onwards supports shm_size
+    - sudo pip install docker-compose==1.9.0 -q
+```
