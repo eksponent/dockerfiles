@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libjpeg62-turbo-dev \
     libpng12-dev \
     libpq-dev \
+    libcurl4-openssl-dev \
     apt-utils \
     mysql-client \
     zlib1g-dev \
@@ -17,7 +18,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     mailutils \
     ssmtp
 
-RUN docker-php-ext-install pdo_mysql mbstring opcache \
+RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && docker-php-ext-install exif
