@@ -48,5 +48,11 @@ if [ -n "$ENABLE_XDEBUG_PROFILE" ]; then
 	sed -i '1 a xdebug.profiler_output_dir = /tmp' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 fi
 
-# Run php-fpm
-php-fpm
+
+if [ -d "/mailspool" ]
+then
+  chown www-data.www-data /mailspool
+fi
+
+# Run php-fpm catch_workers_output will help to push the logs back up the docker stderr pipe.
+php-fpm -d catch_workers_output=yes
