@@ -56,6 +56,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 
 # Install Drush.
 RUN composer global require drush/drush
-RUN echo 'export PATH="$PATH:/root/.composer/vendor/bin"' >> /etc/bash.bashrc
+ADD profile-extras.sh /etc/profile.d/profile-extras.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
