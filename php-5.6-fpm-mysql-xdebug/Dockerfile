@@ -55,7 +55,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 # Install Drush.
-RUN composer global require drush/drush
+RUN composer global require drush/drush:7.*
 ADD profile-extras.sh /etc/profile.d/profile-extras.sh
 
 # Symlink in all the new stuff to the default path, to be even more sure it's discovered.
