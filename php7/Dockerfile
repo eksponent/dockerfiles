@@ -42,3 +42,7 @@ RUN "date"
 RUN docker-php-ext-install pdo pdo_mysql
 RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini 
 
+ADD entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
