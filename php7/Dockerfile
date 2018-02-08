@@ -6,7 +6,6 @@ RUN pecl install mysql redis
 RUN apt-get update && apt-get install -y  --no-install-recommends \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng12-dev \
     libpq-dev \
     libcurl4-openssl-dev \
     apt-utils \
