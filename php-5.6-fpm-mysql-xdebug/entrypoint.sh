@@ -24,7 +24,7 @@ fi
 # We only want xdebug in specific circumstances so it's better to opt-in when we need it
 if [ -n "$ENABLE_XDEBUG_FORCEHOST" ]; then
     # Install and configure Xdebug, RUN is not used in entrypoint scripts
-    pecl install xdebug \
+    pecl install xdebug-2.5.5 \
         && docker-php-ext-enable xdebug \
         && touch /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
         && sed -i '1 a xdebug.remote_autostart=true' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
