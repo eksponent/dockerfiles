@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
 RUN mkdir -p /usr/include/freetype2/freetype && ln -s /usr/include/freetype2/freetype.h /usr/include/freetype2/freetype/freetype.h
 
 
-RUN docker-php-ext-install pdo_mysql mbstring \
+RUN docker-php-ext-install mbstring \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install  gd \
     && docker-php-ext-install  zip \

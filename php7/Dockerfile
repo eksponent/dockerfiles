@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libjpeg62-turbo-dev \
     libpq-dev \
     libcurl4-openssl-dev \
+    libxml2-dev \
     apt-utils \
     mysql-client \
     zlib1g-dev \
@@ -20,7 +21,12 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
 RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
-    && docker-php-ext-install exif
+    && docker-php-ext-install exif \
+    && docker-php-ext-install soap
+
+
+# Install required RabbitMQ modules
+RUN docker-php-ext-install -j$(nproc) bcmath
 
 
 # Install required RabbitMQ modules

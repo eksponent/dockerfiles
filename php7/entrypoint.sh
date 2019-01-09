@@ -36,5 +36,6 @@ if [ -n "$ENABLE_XDEBUG_FORCEHOST" ]; then
 fi
 
 
+
 # Run php-fpm
 php-fpm
