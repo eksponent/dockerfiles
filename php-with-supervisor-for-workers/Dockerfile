@@ -1,7 +1,7 @@
 # PHP 7 with Supervisor for running Workers
 # Based on carlosbuenosvinos/php-with-supervisor-for-workers
 # Carlos Buenosvinos <carlos.buenosvinos@gmail.com>
-FROM php:cli
+FROM php:7.2-cli
 
 RUN pecl install mysql redis
 
