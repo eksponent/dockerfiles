@@ -1,7 +1,7 @@
 # PHP 7 with Supervisor for running Workers
 # Based on carlosbuenosvinos/php-with-supervisor-for-workers
 # Carlos Buenosvinos <carlos.buenosvinos@gmail.com>
-FROM php:cli
+FROM php:7.3-cli
 
 RUN pecl install mysql redis
 
@@ -9,8 +9,9 @@ RUN pecl install mysql redis
 RUN apt-get update && apt-get install -y  --no-install-recommends \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng12-dev \
     libpq-dev \
+    libcurl4-openssl-dev \
+    libxml2-dev \
     apt-utils \
     mysql-client \
     zlib1g-dev \
@@ -18,7 +19,13 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     imagemagick \
     unzip \
     mailutils \
-    ssmtp
+    ssmtp \
+    libzip-dev \
+    zip
+
+# Install libzip https://github.com/docker-library/php/issues/61
+RUN docker-php-ext-configure zip --with-libzip \
+  && docker-php-ext-install zip
 
 # Install required RabbitMQ modules
 RUN docker-php-ext-install -j$(nproc) bcmath
