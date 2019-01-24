@@ -35,4 +35,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ 
 RUN composer global require drush/drush:7.*
 ADD profile-extras.sh /etc/profile.d/profile-extras.sh
 
+# Symlink in all the new stuff to the default path, to be even more sure it's discovered.
+RUN ln -s /root/.composer/vendor/bin/* /usr/local/bin/
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
