@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libpng12-dev \
     libpq-dev \
     apt-utils \
+    git \
     mysql-client \
     zlib1g-dev \
     imagemagick \
