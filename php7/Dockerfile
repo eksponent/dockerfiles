@@ -53,5 +53,12 @@ RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
+# Install Drush.
+RUN composer global require drush/drush:7.*
+ADD profile-extras.sh /etc/profile.d/profile-extras.sh
+
+# Symlink in all the new stuff to the default path, to be even more sure it's discovered.
+RUN ln -s /root/.composer/vendor/bin/* /usr/local/bin/
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
