@@ -16,7 +16,9 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     imagemagick \
     unzip \
     mailutils \
-    ssmtp
+    ssmtp\
+    libmemcached-dev \
+    zlib1g-dev
 
 RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -46,6 +48,9 @@ RUN composer --version
 RUN rm /etc/localtime
 RUN ln -s /usr/share/zoneinfo/Europe/Copenhagen /etc/localtime
 RUN "date"
+
+# install memcache
+RUN pecl install memcached  && docker-php-ext-enable memcached
 
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install pdo pdo_mysql
