@@ -18,7 +18,9 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     mailutils \
     ssmtp\
     libmemcached-dev \
-    zlib1g-dev
+    zlib1g-dev \
+    libpng-dev \
+    libmcrypt-dev
 
 RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -60,7 +62,7 @@ ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Install Drush.
-RUN composer global require drush/drush:7.*
+RUN composer global require drush/drush:8.0.5
 ADD profile-extras.sh /etc/profile.d/profile-extras.sh
 
 # Symlink in all the new stuff to the default path, to be even more sure it's discovered.
