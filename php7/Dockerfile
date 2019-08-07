@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libcurl4-openssl-dev \
     libxml2-dev \
     apt-utils \
-    mysql-client \
+    mariadb-client \
     zlib1g-dev \
     git \
     imagemagick \
