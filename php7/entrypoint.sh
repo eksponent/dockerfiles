@@ -35,7 +35,5 @@ if [ -n "$ENABLE_XDEBUG_FORCEHOST" ]; then
         && sed -i '1 a xdebug.remote_enable=1' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 fi
 
-
-
 # Run php-fpm
 php-fpm
