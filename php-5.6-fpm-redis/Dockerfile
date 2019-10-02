@@ -6,11 +6,10 @@ RUN mkdir -p /usr/src/php/ext
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libpng12-dev \
+        libpng-dev \
         libpq-dev \
         apt-utils \
         git \
-        drush \
         mysql-client \
         zlib1g-dev \
         libxml2-dev \
@@ -31,5 +30,12 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+
+# Install Drush.
+RUN composer global require drush/drush:7.*
+ADD profile-extras.sh /etc/profile.d/profile-extras.sh
+
+# Symlink in all the new stuff to the default path, to be even more sure it's discovered.
+RUN ln -s /root/.composer/vendor/bin/* /usr/local/bin/
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

@@ -4,9 +4,10 @@ FROM php:5.6-fpm
 RUN apt-get update && apt-get install -y  --no-install-recommends \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
-    libpng12-dev \
+    libpng-dev \
     libpq-dev \
     apt-utils \
+    git \
     mysql-client \
     zlib1g-dev \
     imagemagick \

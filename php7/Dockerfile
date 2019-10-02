@@ -10,13 +10,14 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libcurl4-openssl-dev \
     libxml2-dev \
     apt-utils \
-    mysql-client \
+    mariadb-client \
     zlib1g-dev \
     git \
     imagemagick \
+    libwebp-dev \
     unzip \
     mailutils \
-    ssmtp \
+    msmtp \
     libzip-dev \
     zip
 
@@ -24,9 +25,9 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
 # Install libzip https://github.com/docker-library/php/issues/61
 RUN docker-php-ext-configure zip --with-libzip \
   && docker-php-ext-install zip
-  
-RUN docker-php-ext-install pdo_mysql mbstring opcache curl \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+
+RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/  \
     && docker-php-ext-install gd \
     && docker-php-ext-install exif \
     && docker-php-ext-install soap
@@ -36,9 +37,17 @@ RUN docker-php-ext-install pdo_mysql mbstring opcache curl \
 RUN docker-php-ext-install -j$(nproc) bcmath
 
 # imagemagick as PHP extension
-RUN apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
+RUN apt-get install -y libmagickwand-dev --no-install-recommends \
  && pecl install imagick \
  && echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
+
+ # Install ldap
+RUN \
+    apt-get update && \
+    apt-get install libldap2-dev -y && \
+    rm -rf /var/lib/apt/lists/* && \
+    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+    docker-php-ext-install ldap
 
 
 # Install Composer
