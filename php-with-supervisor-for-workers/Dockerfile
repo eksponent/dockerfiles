@@ -10,17 +10,17 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libpq-dev \
-    libpng-dev \
     libcurl4-openssl-dev \
     libxml2-dev \
     apt-utils \
-    mysql-client \
+    mariadb-client \
     zlib1g-dev \
     git \
     imagemagick \
+    libwebp-dev \
     unzip \
     mailutils \
-    ssmtp \
+    msmtp \
     libzip-dev \
     zip
 
@@ -49,7 +49,7 @@ RUN "date"
 
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install -j$(nproc) pdo pdo_mysql
-RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini 
+RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 RUN apt-get update && apt-get install -y supervisor && apt-get clean
 RUN mkdir -p /var/log/supervisor /usr/src/app
