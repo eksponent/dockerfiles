@@ -1,4 +1,4 @@
-FROM php:7.3-fpm
+FROM php:7.4-fpm
 
 RUN pecl install mysql redis
 
@@ -19,15 +19,16 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     mailutils \
     msmtp \
     libzip-dev \
-    zip
+    zip \
+    libonig-dev
 
 
 # Install libzip https://github.com/docker-library/php/issues/61
-RUN docker-php-ext-configure zip --with-libzip \
+RUN docker-php-ext-configure zip \
   && docker-php-ext-install zip
 
 RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/  \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp  \
     && docker-php-ext-install gd \
     && docker-php-ext-install exif \
     && docker-php-ext-install soap
@@ -61,7 +62,7 @@ RUN "date"
 
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install pdo pdo_mysql
-RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini 
+RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

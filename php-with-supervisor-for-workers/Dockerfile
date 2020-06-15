@@ -1,7 +1,7 @@
 # PHP 7 with Supervisor for running Workers
 # Based on carlosbuenosvinos/php-with-supervisor-for-workers
 # Carlos Buenosvinos <carlos.buenosvinos@gmail.com>
-FROM php:7.3-cli
+FROM php:7.4-cli
 
 RUN pecl install mysql redis
 
@@ -14,18 +14,20 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libcurl4-openssl-dev \
     libxml2-dev \
     apt-utils \
-    mysql-client \
+    mariadb-client \
     zlib1g-dev \
     git \
     imagemagick \
+    libwebp-dev \
     unzip \
     mailutils \
-    ssmtp \
+    msmtp \
     libzip-dev \
-    zip
+    zip \
+    libonig-dev
 
 # Install libzip https://github.com/docker-library/php/issues/61
-RUN docker-php-ext-configure zip --with-libzip \
+RUN docker-php-ext-configure zip \
   && docker-php-ext-install zip
 
 # Install required RabbitMQ modules
@@ -33,7 +35,7 @@ RUN docker-php-ext-install -j$(nproc) bcmath
 
 # Install Drupal required modules
 RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring opcache \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install -j$(nproc) exif
 
@@ -49,7 +51,7 @@ RUN "date"
 
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install -j$(nproc) pdo pdo_mysql
-RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini 
+RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 RUN apt-get update && apt-get install -y supervisor && apt-get clean
 RUN mkdir -p /var/log/supervisor /usr/src/app
