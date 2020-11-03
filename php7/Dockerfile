@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     libjpeg62-turbo-dev \
     libpq-dev \
     libcurl4-openssl-dev \
+    openssh-client \
     libxml2-dev \
     apt-utils \
     mariadb-client \
