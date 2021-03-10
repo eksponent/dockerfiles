@@ -37,7 +37,9 @@ RUN docker-php-ext-install -j$(nproc) bcmath
 RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring opcache \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install -j$(nproc) exif
+    && docker-php-ext-install -j$(nproc) exif \
+    && docker-php-ext-configure pcntl --enable-pcntl \
+    && docker-php-ext-install -j$(nproc) pcntl
 
 # imagemagick as PHP extension
 RUN apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
