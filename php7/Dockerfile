@@ -31,7 +31,9 @@ RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/  \
     && docker-php-ext-install gd \
     && docker-php-ext-install exif \
-    && docker-php-ext-install soap
+    && docker-php-ext-install soap \
+    && docker-php-ext-configure pcntl --enable-pcntl \
+    && docker-php-ext-install pcntl
 
 
 # Install required RabbitMQ modules
@@ -62,7 +64,7 @@ RUN "date"
 
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install pdo pdo_mysql
-RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini 
+RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
