@@ -31,7 +31,9 @@ RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp  \
     && docker-php-ext-install gd \
     && docker-php-ext-install exif \
-    && docker-php-ext-install soap
+    && docker-php-ext-install soap \
+    && docker-php-ext-configure pcntl --enable-pcntl \
+    && docker-php-ext-install pcntl
 
 
 # Install required RabbitMQ modules
