@@ -50,9 +50,9 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          file: ${{ matrix.dockerfile }}
-          builder: ${{ steps.buildx.outputs.name }}
           context: ./${{ matrix.context }}
+          file: ./${{ matrix.context }}/${{ matrix.dockerfile }}
+          builder: ${{ steps.buildx.outputs.name }}
           platforms: linux/amd64,linux/arm64
           tags: eksponent/${{ matrix.image }}:${{ matrix.tag }}
 
