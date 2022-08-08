@@ -28,7 +28,19 @@ jobs:
             context: php8
             dockerfile: Dockerfile-8-1-fpm
             tag: 8-1-fpm
-
+          # PHP 7
+          - image: eksponent/php7
+            context: php7
+            dockerfile: Dockerfile-7-2-fpm-memcache
+            tag: 7-2-fpm-memcache
+          - image: eksponent/php7
+            context: php7
+            dockerfile: Dockerfile-7-3-fpm
+            tag: 7-3-fpm
+          - image: eksponent/php7
+            context: php7
+            dockerfile: Dockerfile-7-4-fpm
+            tag: 7-4-fpm
     steps:
       -
         name: Checkout
