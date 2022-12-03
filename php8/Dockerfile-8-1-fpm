@@ -23,15 +23,9 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     msmtp \
     libzip-dev
 
-RUN docker-php-ext-install pdo_mysql mbstring opcache zip curl \
+RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring opcache zip curl soap APCu bcmath \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp=/usr/include/  \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install exif \
-    && docker-php-ext-install soap
-
-
-# Install required RabbitMQ modules
-RUN docker-php-ext-install -j$(nproc) bcmath
+    && docker-php-ext-install -j$(nproc) gd exif
 
 # imagemagick as PHP extension
 RUN apt-get install -y libmagickwand-dev --no-install-recommends \
@@ -45,7 +39,7 @@ RUN \
     apt-get install libldap2-dev -y && \
     rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-configure ldap --with-libdir=lib/$debArch/ && \
-    docker-php-ext-install ldap
+    docker-php-ext-install -j$(nproc) ldap
 
 # Set timezone
 RUN rm /etc/localtime
