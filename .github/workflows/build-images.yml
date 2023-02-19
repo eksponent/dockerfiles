@@ -27,6 +27,10 @@ jobs:
             context: php8
             dockerfile: Dockerfile-8-1-fpm
             tag: 8-1-fpm
+          - image: eksponent/php8
+            context: php8
+            dockerfile: Dockerfile-8-2-fpm
+            tag: 8-2-fpm
           # PHP 7
           - image: eksponent/php7
             context: php7
