@@ -48,15 +48,15 @@ jobs:
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
             dockerfile: Dockerfile-8.0
-            tag: 8.0
+            tag: '8.0'
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
             dockerfile: Dockerfile-8.1
-            tag: 8.1
+            tag: '8.1'
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
             dockerfile: Dockerfile-8.2
-            tag: 8.2
+            tag: '8.2'
     steps:
       -
         name: Checkout
