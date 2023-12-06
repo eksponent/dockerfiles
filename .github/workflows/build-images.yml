@@ -33,8 +33,8 @@ jobs:
             tag: 8-2-fpm
           - image: eksponent/php8
             context: php8
-            dockerfile: Dockerfile-8-3-rc-fpm
-            tag: 8-3-rc-fpm
+            dockerfile: Dockerfile-8-3-fpm
+            tag: 8-3-fpm
           # PHP 7
           - image: eksponent/php7
             context: php7
@@ -63,8 +63,8 @@ jobs:
             tag: '8.2'
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
-            dockerfile: Dockerfile-8.3-rc
-            tag: '8.3-rc'
+            dockerfile: Dockerfile-8.3
+            tag: '8.3'
     steps:
       -
         name: Checkout

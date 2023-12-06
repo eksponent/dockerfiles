@@ -1,6 +1,6 @@
 ARG ARCH=${ARCH}
 
-FROM php:8.3-rc-fpm
+FROM php:8.3-fpm
 
 RUN pecl install mysql redis
 
