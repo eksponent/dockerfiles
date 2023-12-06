@@ -1,6 +1,6 @@
 ARG ARCH=${ARCH}
 
-FROM php:8.3-rc-fpm
+FROM php:8.3-fpm
 
 RUN pecl install mysql redis
 
@@ -53,7 +53,7 @@ RUN "date"
 RUN echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini
 
 # Install Composer
-COPY --from=composer:2.5.4 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
 
 ADD entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
