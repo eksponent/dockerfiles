@@ -21,10 +21,11 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     unzip \
     mailutils \
     msmtp \
-    libzip-dev
+    libzip-dev \
+    libavif-dev
 
 RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring opcache zip curl soap bcmath \
-    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp=/usr/include/  \
+    && docker-php-ext-configure gd --with-avif --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp=/usr/include/  \
     && docker-php-ext-install -j$(nproc) gd exif
 
 RUN pecl install apcu igbinary \
