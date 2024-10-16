@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y  --no-install-recommends \
     msmtp \
     libzip-dev
 
-RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring opcache zip curl soap bcmath pcntl \
+RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring opcache zip curl soap bcmath pcntl sockets \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp=/usr/include/  \
     && docker-php-ext-install -j$(nproc) gd exif \
     && docker-php-ext-configure pcntl --enable-pcntl
