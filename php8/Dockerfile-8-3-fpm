@@ -35,6 +35,7 @@ RUN pecl install apcu igbinary \
 # Imagemagick as PHP extension
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 RUN install-php-extensions imagick/imagick@28f27044e435a2b203e32675e942eb8de620ee58
+RUN install-php-extensions opentelemetry-stable
 
  # Install ldap
 RUN \

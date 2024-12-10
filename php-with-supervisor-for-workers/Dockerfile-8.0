@@ -27,8 +27,8 @@ RUN docker-php-ext-install -j$(nproc) pdo_mysql mbstring opcache zip curl soap b
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp=/usr/include/  \
     && docker-php-ext-configure pcntl --enable-pcntl
 
-RUN pecl install apcu igbinary \
-    && docker-php-ext-enable apcu igbinary
+RUN pecl install apcu igbinary opentelemetry-stable \
+    && docker-php-ext-enable apcu igbinary opentelemetry
 
 # imagemagick as PHP extension
 RUN apt-get install -y libmagickwand-dev --no-install-recommends \
