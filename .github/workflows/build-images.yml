@@ -23,35 +23,53 @@ jobs:
             context: php8
             dockerfile: Dockerfile-8-0-fpm
             tag: 8-0-fpm
+            version: '8.0'
           - image: eksponent/php8
             context: php8
             dockerfile: Dockerfile-8-1-fpm
             tag: 8-1-fpm
+            version: '8.1'
           - image: eksponent/php8
             context: php8
             dockerfile: Dockerfile-8-2-fpm
             tag: 8-2-fpm
+            version: '8.2'
           - image: eksponent/php8
             context: php8
             dockerfile: Dockerfile-8-3-fpm
             tag: 8-3-fpm
+            version: '8.3'
+          - image: eksponent/php8
+            context: php8
+            dockerfile: Dockerfile-8-4-fpm
+            tag: 8-4-fpm
+            version: '8.4'
           # PHP workers
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
             dockerfile: Dockerfile-8.0
             tag: '8.0'
+            version: '8.0'
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
             dockerfile: Dockerfile-8.1
             tag: '8.1'
+            version: '8.1'
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
             dockerfile: Dockerfile-8.2
             tag: '8.2'
+            version: '8.2'
           - image: eksponent/php-with-supervisor-for-workers
             context: php-with-supervisor-for-workers
             dockerfile: Dockerfile-8.3
             tag: '8.3'
+            version: '8.3'
+          - image: eksponent/php-with-supervisor-for-workers
+            context: php-with-supervisor-for-workers
+            dockerfile: Dockerfile-8.3
+            tag: '8.4'
+            version: '8.4'
     steps:
       -
         name: Checkout
@@ -79,6 +97,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ matrix.image }}:${{ matrix.tag }}
+          build-args: |
+            "PHP_VERSION=${{ matrix.version }}"
 
 
 
